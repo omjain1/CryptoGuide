@@ -4,3 +4,4 @@ websocket-client
 keras
 requests
 scikit-learn
+tensorflow
