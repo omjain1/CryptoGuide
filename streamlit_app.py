@@ -8,6 +8,10 @@ from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 import threading
 import re
+# Define custom objects
+custom_objects = {
+    'Orthogonal': Orthogonal
+}
 
 # Streamlit app title and description
 st.title('Crypto Price Prediction & Trading Bot')
@@ -19,7 +23,7 @@ crypto_list = ['BTC', 'ETH', 'LTC']
 symbol = 'BITSTAMP_SPOT_BTC_USD'
 selected_crypto = st.selectbox('Select a cryptocurrency:', crypto_list)
 url = "https://rest.coinapi.io/v1/ohlcv/BITSTAMP_SPOT_BTC_USD/history"
-api_key = "abce3587-6ce0-4af2-8d8e-c99533eadc0c"
+api_key = "EB519846-6527-4BAA-AA7D-FDD4E2CDF8E3"
 
 @st.cache_data(ttl=86400)
 def get_historical_data(symbol):
@@ -47,9 +51,9 @@ if 'df' not in st.session_state:
 # model = keras.models.load_model('price_prediction_btc.h5')
 symbol = ""
 if selected_crypto == "LTC":
+    model = keras.models.load_model('price_prediction_ltc2.h5', custom_objects=custom_objects)
     symbol = "BITSTAMP_SPOT_LTC_USD"
     st.session_state.df = get_historical_data(symbol)
-    model = keras.models.load_model('price_prediction_ltc2.h5')
 elif selected_crypto == "BTC":
     model = keras.models.load_model('price_prediction_btc1.h5')
     symbol = "BITSTAMP_SPOT_BTC_USD"
