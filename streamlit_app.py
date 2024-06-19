@@ -8,6 +8,7 @@ from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 import threading
 import re
+from keras.initializers import Orthogonal
 # Define custom objects
 custom_objects = {
     'Orthogonal': Orthogonal
